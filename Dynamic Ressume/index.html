@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasanth's Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .profile-img-container {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            opacity: 0.8;
+        }
+        
+        .upload-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-btn:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+        
+        .upload-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        #file-input {
+            display: none;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav {
+            background-color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            padding: 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 0.5rem auto;
+        }
+        
+        .summary {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .education-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .education-table th, .education-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .education-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .education-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .skill-category {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+        
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-list li::before {
+            content: '▹';
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            height: 200px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background-color: var(--light-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .project-details {
+            margin-bottom: 1rem;
+        }
+        
+        .project-features {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+        
+        .project-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+        }
+        
+        .project-features li::before {
+            content: '•';
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .certifications-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .certification-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left::after, .right::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+
+        /* Modal styles for image upload */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover {
+            color: black;
+        }
+        
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .preview-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .preview-img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        
+        .upload-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .save-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .save-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .cancel-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Dark theme styles */
+        body.dark-theme {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #2c3e50;
+            --dark-color: #ecf0f1;
+            --text-color: #ecf0f1;
+            --text-light: #bdc3c7;
+            background-color: #1a1a1a;
+        }
+
+        body.dark-theme .skill-category,
+        body.dark-theme .project-card,
+        body.dark-theme .certification-card,
+        body.dark-theme .timeline-content,
+        body.dark-theme .summary,
+        body.dark-theme .education-table tr:hover {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+
+        body.dark-theme .education-table th {
+            background-color: var(--primary-color);
+        }
+
+        body.dark-theme .education-table td {
+            color: #ecf0f1;
+        }
+
+        body.dark-theme .tech-tag {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        body.dark-theme .section-title {
+            color: var(--dark-color);
+        }
+
+        body.dark-theme .project-image {
+            background-color: var(--primary-color);
+        }
+
+        /* Edit mode styles */
+        .edit-mode .editable {
+            position: relative;
+            border: 1px dashed rgba(52, 152, 219, 0.5);
+            padding: 0.2rem;
+            margin: -0.2rem;
+            border-radius: 4px;
+        }
+
+        .edit-mode .editable:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .edit-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Edit modal styles */
+        .edit-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .edit-modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .edit-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .edit-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .edit-form-group input,
+        .edit-form-group textarea,
+        .edit-form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .edit-form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .edit-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Add project button */
+        .add-project-btn {
+            display: block;
+            margin: 2rem auto;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .add-project-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Remove button for projects */
+        .remove-project-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-project-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="profile-img-container">
+                <img id="profile-img" class="profile-img" src="https://via.placeholder.com/150" alt="Profile Picture">
+                <button class="upload-btn" id="upload-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </button>
+                <input type="file" id="file-input" accept="image/*">
+            </div>
+            <h1 class="editable" data-field="name">PNAGA DURGA PRASANTH</h1>
+            <p class="tagline editable" data-field="tagline">Full Stack Developer | Python Expert | Web Technologies</p>
+            <div class="contact-info">
+                <a href="mailto:pndprasanth14@gmail.com" class="editable" data-field="email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                    </svg>
+                    <span class="editable-text">pndprasanth14@gmail.com</span>
+                </a>
+                <a href="tel:9100204556" class="editable" data-field="phone">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                    </svg>
+                    <span class="editable-text">9100204556</span>
+                </a>
+                <a href="https://www.linkedin.com/in/pentapati-naga-durga-prasanth-800883334/" target="_blank" class="editable" data-field="linkedin">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.436.532-.878 1.152-.878.773 0 1.222.332 1.222 1.102v4.832h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                    </svg>
+                    <span class="editable-text">LinkedIn Profile</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Image Upload Modal -->
+    <div id="upload-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Upload Profile Picture</h2>
+            <div class="upload-container">
+                <div class="preview-container">
+                    <img id="preview-img" class="preview-img" alt="Preview">
+                    <p id="upload-text">No image selected</p>
+                </div>
+                <input type="file" id="modal-file-input" accept="image/*">
+                <div class="upload-actions">
+                    <button class="action-btn save-btn" id="save-btn">Save</button>
+                    <button class="action-btn cancel-btn" id="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="edit-modal">
+        <div class="edit-modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Edit Content</h2>
+            <form id="edit-form">
+                <div class="edit-form-group">
+                    <label for="edit-field">Field:</label>
+                    <input type="text" id="edit-field" readonly>
+                </div>
+                <div class="edit-form-group">
+                    <label for="edit-content">Content:</label>
+                    <textarea id="edit-content"></textarea>
+                </div>
+                <div class="edit-form-actions">
+                    <button type="button" class="action-btn cancel-btn" id="edit-cancel-btn">Cancel</button>
+                    <button type="button" class="action-btn save-btn" id="edit-save-btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <nav>
+        <ul class="nav-links container">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="summary editable" data-field="summary">
+                <p>To secure a good and responsible career opportunity which make me to develop my skills and to explore in new areas which help to bring success of the company.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category editable" data-field="skills-languages">
+                    <h3>Languages</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>C</li>
+                    </ul>
+                </div>
+                <div class="skill-category editable" data-field="skills-backend">
+                    <h3>Backend</h3>
+                    <ul class="skill-list">
+                        <li>FastAPI</li>
+                        <li>Flask</li>
+                        <li>Django</li>
+                        <li>RESTful APIs</li>
+                        <li>Jinja2</li>
+                    </ul>
+                </div>
+                <div class="skill-category editable" data-field="skills-frontend">
+                    <h3>Frontend</h3>
+                    <ul class="skill-list">
+                        <li>HTML/CSS</li>
+                        <li>JavaScript</li>
+                        <li>React</li>
+                        <li>Angular</li>
+                    </ul>
+                </div>
+                <div class="skill-category editable" data-field="skills-databases">
+                    <h3>Databases & Tools</h3>
+                    <ul class="skill-list">
+                        <li>MongoDB</li>
+                        <li>MySQL</li>
+                        <li>GitHub</li>
+                        <li>Docker</li>
+                        <li>Prompt Engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid" id="projects-container">
+                <!-- Project 1 -->
+                <div class="project-card" data-id="1">
+                    <div class="project-image" style="background-color: #3498db;">
+                        Job Board Application
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title editable" data-field="project-1-title">Job Board Application</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                        <div class="project-details editable" data-field="project-1-details">
+                            <p>A full-stack web platform connecting employers and job seekers with features like job postings, search filters, and application tracking.</p>
+                        </div>
+                        <ul class="project-features editable" data-field="project-1-features">
+                            <li>Implemented user authentication (JWT/OAuth) and role-based access control</li>
+                            <li>Designed RESTful APIs for seamless frontend-backend integration</li>
+                            <li>Built an admin panel to manage users and monitor analytics</li>
+                            <li>Ensured responsive UI/UX and data security</li>
+                        </ul>
+                        <button class="remove-project-btn" data-id="1">Remove Project</button>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card" data-id="2">
+                    <div class="project-image" style="background-color: #e74c3c;">
+                        Attendance System
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title editable" data-field="project-2-title">Employee Attendance Management System</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">DateTime</span>
+                        </div>
+                        <div class="project-details editable" data-field="project-2-details">
+                            <p>A Python-based system to track employee attendance, calculate working hours, and generate automated reports.</p>
+                        </div>
+                        <ul class="project-features editable" data-field="project-2-features">
+                            <li>Leveraged MongoDB for efficient data storage/retrieval</li>
+                            <li>Implemented logic for real-time attendance updates</li>
+                            <li>Automated report generation (daily logs, monthly summaries)</li>
+                            <li>User-friendly input methods (QR codes/biometric integration potential)</li>
+                        </ul>
+                        <button class="remove-project-btn" data-id="2">Remove Project</button>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card" data-id="3">
+                    <div class="project-image" style="background-color: #2ecc71;">
+                        Resume Builder
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title editable" data-field="project-3-title">Dynamic Resume Builder</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">AI Integration</span>
+                        </div>
+                        <div class="project-details editable" data-field="project-3-details">
+                            <p>A full-stack web application for creating professional resumes with real-time previews and AI-powered suggestions.</p>
+                        </div>
+                        <ul class="project-features editable" data-field="project-3-features">
+                            <li>Dynamic resume generation with real-time previews</li>
+                            <li>AI-powered suggestions for skills/job descriptions</li>
+                            <li>RESTful API with secure user authentication (JWT/OAuth)</li>
+                            <li>Customizable templates with responsive design</li>
+                        </ul>
+                        <button class="remove-project-btn" data-id="3">Remove Project</button>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card" data-id="4">
+                    <div class="project-image" style="background-color: #9b59b6;">
+                        Portfolio Website
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title editable" data-field="project-4-title">Interactive Portfolio Webpage</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Responsive Design</span>
+                        </div>
+                        <div class="project-details editable" data-field="project-4-details">
+                            <p>A responsive single-page website showcasing personal projects with clean UI/UX design.</p>
+                        </div>
+                        <ul class="project-features editable" data-field="project-4-features">
+                            <li>Dynamic elements using JavaScript</li>
+                            <li>Animated navigation and interactive galleries</li>
+                            <li>Styled with CSS Flexbox/Grid for modern layouts</li>
+                            <li>Cross-browser compatibility</li>
+                        </ul>
+                        <button class="remove-project-btn" data-id="4">Remove Project</button>
+                    </div>
+                </div>
+            </div>
+            <button class="add-project-btn" id="add-project-btn">Add New Project</button>
+        </div>
+    </section>
+    
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <table class="education-table">
+                <thead>
+                    <tr>
+                        <th>Institution</th>
+                        <th>Year</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="editable" data-field="education-1">
+                        <td>Adarsa Degree College, Kakinada</td>
+                        <td>2020-2024</td>
+                        <td>Bachelors of Science and Technology (BSC-Mathematics, Physics, Computer Science) - 69.4%</td>
+                    </tr>
+                    <tr class="editable" data-field="education-2">
+                        <td>Sri Chaitanya Junior College, Kakinada</td>
+                        <td>2018-2020</td>
+                        <td>MPC (Maths, Physics, Chemistry) - 59%</td>
+                    </tr>
+                    <tr class="editable" data-field="education-3">
+                        <td>Z.P.P. High School Kovvada</td>
+                        <td>2017-2018</td>
+                        <td>SSC - 80%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section id="experience" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content editable" data-field="experience-1">
+                        <div class="timeline-date">Dec 2024 – Mar 2025</div>
+                        <h3>Full Stack Python Developer Intern</h3>
+                        <h4>Hallmark Global Technologies, Kakinada</h4>
+                        <ul class="project-features">
+                            <li>Developed scalable backend services using Python and FastAPI, improving API response time by 30%</li>
+                            <li>Built RESTful APIs for seamless frontend-backend integration in web applications</li>
+                            <li>Managed MongoDB databases, optimizing queries to reduce data retrieval time by 25%</li>
+                            <li>Designed responsive UIs with HTML/CSS/JavaScript, enhancing user experience metrics by 40%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content editable" data-field="experience-2">
+                        <div class="timeline-date">July 2023 – Sep 2023</div>
+                        <h3>Python Full-Stack Developer Trainee</h3>
+                        <h4>Epro Academy, Rajahmundry</h4>
+                        <ul class="project-features">
+                            <li>Implemented frontend features using JavaScript, focusing on ES6+ concepts (Async/Await, Promises)</li>
+                            <li>Developed interactive web components with Angular and React.js, boosting page engagement</li>
+                            <li>Contributed to team projects using Agile methodologies (Sprint Planning, Daily Standups)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="certifications-list">
+                <div class="certification-card editable" data-field="certification-1">
+                    <h3>Python Fullstack Development</h3>
+                    <p>Hallmark Global Technologies, Kakinada</p>
+                </div>
+                <div class="certification-card editable" data-field="certification-2">
+                    <h3>Python Backend Development</h3>
+                    <p>Epro Academy</p>
+                </div>
+                <div class="certification-card editable" data-field="certification-3">
+                    <h3>C Programming</h3>
+                    <p>Certificate of Completion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year">2024</span> <span class="editable" data-field="footer-name">PNAGA DURGA PRASANTH</span>. All rights reserved.</p>
+            <p class="editable" data-field="address">2-111 Rajiv colony ganganapalle, Kakinada, Andharapradesh, 533006</p>
+        </div>
+    </footer>
+
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" id="theme-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+        </svg>
+    </button>
+
+    <!-- Edit mode toggle button -->
+    <button class="edit-btn" id="edit-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+    </button>
+
+    <script>
+        // Profile picture upload functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileImg = document.getElementById('profile-img');
+            const uploadTrigger = document.getElementById('upload-trigger');
+            const fileInput = document.getElementById('file-input');
+            const modal = document.getElementById('upload-modal');
+            const closeBtn = document.querySelector('.close-btn');
+            const modalFileInput = document.getElementById('modal-file-input');
+            const previewImg = document.getElementById('preview-img');
+            const uploadText = document.getElementById('upload-text');
+            const saveBtn = document.getElementById('save-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            
+            let selectedFile = null;
+            
+            // Open upload modal when clicking the upload button
+            uploadTrigger.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
+            
+            // Close modal when clicking the X button
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                resetModal();
+            });
+            
+            // Close modal when clicking outside of it
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    resetModal();
+                }
+            });
+            
+            // Handle file selection in modal
+            modalFileInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    selectedFile = e.target.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        previewImg.src = event.target.result;
+                        previewImg.style.display = 'block';
+                        uploadText.style.display = 'none';
+                    }
+                    
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+            
+            // Save the selected image
+            saveBtn.addEventListener('click', function() {
+                if (selectedFile) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        profileImg.src = event.target.result;
+                        
+                        // Save to localStorage
+                        localStorage.setItem('profileImage', event.target.result);
+                        
+                        // Close modal and reset
+                        modal.style.display = 'none';
+                        resetModal();
+                    }
+                    
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+            
+            // Cancel button
+            cancelBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                resetModal();
+            });
+            
+            // Check if there's a saved image in localStorage
+            const savedImage = localStorage.getItem('profileImage');
+            if (savedImage) {
+                profileImg.src = savedImage;
+            }
+            
+            // Reset modal state
+            function resetModal() {
+                modalFileInput.value = '';
+                previewImg.src = '';
+                previewImg.style.display = 'none';
+                uploadText.style.display = 'block';
+                selectedFile = null;
+            }
+            
+            // Direct file upload (without modal)
+            fileInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        profileImg.src = event.target.result;
+                        
+                        // Save to localStorage
+                        localStorage.setItem('profileImage', event.target.result);
+                    }
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-theme');
+                
+                // Save theme preference to localStorage
+                if (document.body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+
+            // Edit mode functionality
+            const editToggle = document.getElementById('edit-toggle');
+            let editMode = false;
+            
+            editToggle.addEventListener('click', function() {
+                editMode = !editMode;
+                document.body.classList.toggle('edit-mode');
+                
+                // Change icon based on edit mode
+                if (editMode) {
+                    editToggle.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                            <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                        </svg>
+                    `;
+                } else {
+                    editToggle.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    `;
+                }
+            });
+
+            // Edit modal functionality
+            const editModal = document.getElementById('edit-modal');
+            const editForm = document.getElementById('edit-form');
+            const editFieldInput = document.getElementById('edit-field');
+            const editContentInput = document.getElementById('edit-content');
+            const editSaveBtn = document.getElementById('edit-save-btn');
+            const editCancelBtn = document.getElementById('edit-cancel-btn');
+            let currentEditableElement = null;
+
+            // Handle clicks on editable elements
+            document.addEventListener('click', function(e) {
+                if (!editMode) return;
+                
+                // Find the closest editable parent
+                const editableElement = e.target.closest('.editable');
+                if (editableElement && !e.target.closest('.remove-project-btn')) {
+                    e.preventDefault();
+                    currentEditableElement = editableElement;
+                    
+                    // Get the field name and content
+                    const fieldName = editableElement.getAttribute('data-field');
+                    let content = '';
+                    
+                    if (editableElement.tagName === 'A') {
+                        // For links, get the text content of the span
+                        content = editableElement.querySelector('.editable-text').textContent;
+                    } else if (editableElement.tagName === 'UL' || editableElement.tagName === 'TABLE') {
+                        // For lists and tables, get the HTML content
+                        content = editableElement.innerHTML;
+                    } else {
+                        // For other elements, get the text content
+                        content = editableElement.textContent;
+                    }
+                    
+                    // Populate the edit modal
+                    editFieldInput.value = fieldName;
+                    editContentInput.value = content;
+                    
+                    // Show the modal
+                    editModal.style.display = 'block';
+                }
+            });
+
+            // Close edit modal
+            document.querySelector('#edit-modal .close-btn').addEventListener('click', function() {
+                editModal.style.display = 'none';
+            });
+
+            editCancelBtn.addEventListener('click', function() {
+                editModal.style.display = 'none';
+            });
+
+            // Save edited content
+            editSaveBtn.addEventListener('click', function() {
+                if (!currentEditableElement) return;
+                
+                const newContent = editContentInput.value;
+                
+                if (currentEditableElement.tagName === 'A') {
+                    // For links, update the span content
+                    currentEditableElement.querySelector('.editable-text').textContent = newContent;
+                } else if (currentEditableElement.tagName === 'UL' || currentEditableElement.tagName === 'TABLE') {
+                    // For lists and tables, update the HTML content
+                    currentEditableElement.innerHTML = newContent;
+                } else {
+                    // For other elements, update the text content
+                    currentEditableElement.textContent = newContent;
+                }
+                
+                // Save to localStorage
+                localStorage.setItem(currentEditableElement.getAttribute('data-field'), newContent);
+                
+                // Close the modal
+                editModal.style.display = 'none';
+            });
+
+            // Load saved content from localStorage
+            document.querySelectorAll('.editable').forEach(element => {
+                const fieldName = element.getAttribute('data-field');
+                const savedContent = localStorage.getItem(fieldName);
+                
+                if (savedContent) {
+                    if (element.tagName === 'A') {
+                        element.querySelector('.editable-text').textContent = savedContent;
+                    } else if (element.tagName === 'UL' || element.tagName === 'TABLE') {
+                        element.innerHTML = savedContent;
+                    } else {
+                        element.textContent = savedContent;
+                    }
+                }
+            });
+
+            // Add new project functionality
+            const addProjectBtn = document.getElementById('add-project-btn');
+            const projectsContainer = document.getElementById('projects-container');
+            let projectCounter = 4; // Starting from 5 since we have 4 projects already
+            
+            addProjectBtn.addEventListener('click', function() {
+                projectCounter++;
+                const newProjectId = projectCounter;
+                
+                const newProject = document.createElement('div');
+                newProject.className = 'project-card';
+                newProject.setAttribute('data-id', newProjectId);
+                
+                // Random color for project image
+                const colors = ['#3498db', '#e74c3c', '#2ecc71', '#9b59b6', '#f39c12', '#1abc9c'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                newProject.innerHTML = `
+                    <div class="project-image" style="background-color: ${randomColor}">
+                        New Project
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title editable" data-field="project-${newProjectId}-title">New Project Title</h3>
+                        <div class="project-tech">
+                            <span class="tech-tag">Technology</span>
+                            <span class="tech-tag">Framework</span>
+                        </div>
+                        <div class="project-details editable" data-field="project-${newProjectId}-details">
+                            <p>Project description goes here.</p>
+                        </div>
+                        <ul class="project-features editable" data-field="project-${newProjectId}-features">
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                            <li>Feature 3</li>
+                        </ul>
+                        <button class="remove-project-btn" data-id="${newProjectId}">Remove Project</button>
+                    </div>
+                `;
+                
+                projectsContainer.appendChild(newProject);
+                
+                // Scroll to the new project
+                newProject.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Remove project functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-project-btn')) {
+                    const projectId = e.target.getAttribute('data-id');
+                    const projectToRemove = document.querySelector(`.project-card[data-id="${projectId}"]`);
+                    
+                    if (projectToRemove) {
+                        projectToRemove.remove();
+                        
+                        // Remove from localStorage
+                        localStorage.removeItem(`project-${projectId}-title`);
+                        localStorage.removeItem(`project-${projectId}-details`);
+                        localStorage.removeItem(`project-${projectId}-features`);
+                    }
+                }
+            });
+
+            // Update current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
